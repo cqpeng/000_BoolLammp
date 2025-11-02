@@ -20,6 +20,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
+            <ColumnDefinition Width="5" />
             <ColumnDefinition Width="Auto" MinWidth="100" />
         </Grid.ColumnDefinitions>
         <ItemsControl ItemsSource="{Binding LampList}">
@@ -70,9 +71,14 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <StackPanel Grid.Column="1">
+        <GridSplitter
+            Grid.Column="1"
+            Width="5"
+            HorizontalAlignment="Stretch"
+            ResizeDirection="Auto" />
+        <StackPanel Grid.Column="2" Width="Auto">
 
-            <DockPanel>
+            <DockPanel Margin="5">
                 <Label Content="数量" />
                 <TextBox Text="{Binding LampCount, StringFormat={}{0:F0}}" />
             </DockPanel>
@@ -107,7 +113,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </DockPanel>
-            
+
             <DockPanel Margin="5">
                 <Label Content="延时ms" />
                 <TextBox Text="{Binding DelayTime, StringFormat={}{0:F0}}" />
