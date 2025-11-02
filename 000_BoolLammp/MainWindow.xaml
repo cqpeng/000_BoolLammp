@@ -2,23 +2,27 @@
     x:Class="_000_BoolLammp.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cov="clr-namespace:_000_BoolLammp.Helper.Conveter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:_000_BoolLammp"
+    xmlns:localExHelper="clr-namespace:_000_BoolLammp.Helper"
+    xmlns:localType="clr-namespace:_000_BoolLammp.Helper.TypeDefine"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
     Width="800"
     Height="450"
-    d:DataContext="{d:DesignInstance {x:Type local:LampList}}"
+    d:DataContext="{d:DesignInstance {x:Type local:MainViewModel}}"
     mc:Ignorable="d">
     <Window.Resources>
-        <local:BoolInvConveter x:Key="boolInv" />
+        <cov:BoolInvConveter x:Key="boolInv" />
+        <cov:EnumDescriptionConverter x:Key="Ec" />
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="Auto" MinWidth="100" />
         </Grid.ColumnDefinitions>
-        <ItemsControl ItemsSource="{Binding BoolList}">
+        <ItemsControl ItemsSource="{Binding LampList}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" />
@@ -43,7 +47,7 @@
                                                         Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
                                                         From="White"
                                                         To="Red"
-                                                        Duration="0:0:0.3" />
+                                                        Duration="0:0:0.1" />
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </DataTrigger.EnterActions>
@@ -54,7 +58,7 @@
                                                         Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
                                                         From="Red"
                                                         To="White"
-                                                        Duration="0:0:0.3" />
+                                                        Duration="0:0:0.1" />
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </DataTrigger.ExitActions>
@@ -67,25 +71,60 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         <StackPanel Grid.Column="1">
+
+            <DockPanel>
+                <Label Content="数量" />
+                <TextBox Text="{Binding LampCount, StringFormat={}{0:F0}}" />
+            </DockPanel>
+            <Button
+                Height="40"
+                Margin="10"
+                Background="Gray"
+                Command="{Binding InitializeLampListCommand}"
+                Content="初始化"
+                IsEnabled="{Binding IsRun, Converter={StaticResource boolInv}}" />
+            <Button
+                Height="40"
+                Margin="10"
+                Background="Gray"
+                Command="{Binding ClearLampListCommand}"
+                Content="清空"
+                IsEnabled="{Binding IsRun, Converter={StaticResource boolInv}}" />
             <Button
                 Height="40"
                 Margin="10"
                 Background="Yellow"
-                Command="{Binding StartBlinkCommand}"
+                Command="{Binding ResetCommand}"
                 Content="重置"
-                IsEnabled="{Binding IsRun}" />
+                IsEnabled="{Binding IsRun, Converter={StaticResource boolInv}}" />
+            <DockPanel Margin="5">
+                <Label Content="模式" />
+                <ComboBox ItemsSource="{localExHelper:EnumBindingSource EnumType=localType:Mode}" SelectedItem="{Binding Mode}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource Ec}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </DockPanel>
+            
+            <DockPanel Margin="5">
+                <Label Content="延时ms" />
+                <TextBox Text="{Binding DelayTime, StringFormat={}{0:F0}}" />
+            </DockPanel>
+
             <Button
                 Height="40"
                 Margin="10"
                 Background="LightGreen"
-                Command="{Binding StartBlinkCommand}"
+                Command="{Binding StartCommand}"
                 Content="启动"
                 IsEnabled="{Binding IsRun, Converter={StaticResource boolInv}}" />
             <Button
                 Height="40"
                 Margin="10"
                 Background="Red"
-                Command="{Binding StopBlinkCommand}"
+                Command="{Binding StopCommand}"
                 Content="停止"
                 IsEnabled="{Binding IsRun}" />
 

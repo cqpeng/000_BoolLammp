@@ -19,14 +19,7 @@ namespace _000_BoolLammp
         public MainWindow()
         {
             InitializeComponent();
-            var viewModel = new MainViewModel();
-            for (int i = 0; i < 100; i++)
-            {
-                var lamp = new Lamp();
-                lamp.Id = i;
-                viewModel.AddLamp(lamp);
-            }
-            DataContext = viewModel;
+            DataContext = new MainViewModel();
         }
     }
 }

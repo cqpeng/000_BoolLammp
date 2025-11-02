@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Helper\Selector\" />
     <Folder Include="View\" />
     <Folder Include="Resources\" />
   </ItemGroup>

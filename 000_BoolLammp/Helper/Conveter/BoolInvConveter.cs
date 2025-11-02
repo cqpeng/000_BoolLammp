@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace _000_BoolLammp.Conveter
+namespace _000_BoolLammp.Helper.Conveter
 {
     internal class BoolInvConveter : IValueConverter
     {
