@@ -80,7 +80,7 @@
 
             <DockPanel Margin="5">
                 <Label Content="数量" />
-                <TextBox Text="{Binding LampCount, StringFormat={}{0:F0}}" />
+                <TextBox d:Text="20" Text="{Binding LampCount, StringFormat={}{0:F0}}" />
             </DockPanel>
             <Button
                 Height="40"
@@ -105,7 +105,10 @@
                 IsEnabled="{Binding IsRun, Converter={StaticResource boolInv}}" />
             <DockPanel Margin="5">
                 <Label Content="模式" />
-                <ComboBox ItemsSource="{localExHelper:EnumBindingSource EnumType=localType:Mode}" SelectedItem="{Binding Mode}">
+                <ComboBox
+                    d:SelectedIndex="0"
+                    ItemsSource="{localExHelper:EnumBindingSource EnumType=localType:Mode}"
+                    SelectedItem="{Binding Mode}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource Ec}}" />
@@ -116,7 +119,7 @@
 
             <DockPanel Margin="5">
                 <Label Content="延时ms" />
-                <TextBox Text="{Binding DelayTime, StringFormat={}{0:F0}}" />
+                <TextBox d:Text="50" Text="{Binding DelayTime, StringFormat={}{0:F0}}" />
             </DockPanel>
 
             <Button
