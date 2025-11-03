@@ -80,7 +80,10 @@
 
             <DockPanel Margin="5">
                 <Label Content="数量" />
-                <TextBox d:Text="20" Text="{Binding LampCount, StringFormat={}{0:F0}}" />
+                <TextBox
+                    VerticalContentAlignment="Center"
+                    d:Text="20"
+                    Text="{Binding LampCount, StringFormat={}{0:F0}}" />
             </DockPanel>
             <Button
                 Height="40"
@@ -119,7 +122,10 @@
 
             <DockPanel Margin="5">
                 <Label Content="延时ms" />
-                <TextBox d:Text="50" Text="{Binding DelayTime, StringFormat={}{0:F0}}" />
+                <TextBox
+                    VerticalContentAlignment="Center"
+                    d:Text="50"
+                    Text="{Binding DelayTime, StringFormat={}{0:F0}}" />
             </DockPanel>
 
             <Button
